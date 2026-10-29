@@ -17,16 +17,9 @@ import (
 
 // ---------- 管理端中间件 ----------
 
-type ctxKeyAdmin string
-
-const ctxAdmin ctxKeyAdmin = "admin"
-
 func (s *Server) adminAuth(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		tok := strings.TrimSpace(r.Header.Get("X-Admin-Token"))
-		if tok == "" {
-			tok = strings.TrimSpace(strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer "))
-		}
+		tok := adminToken(r)
 		if tok == "" {
 			fail(w, http.StatusUnauthorized, "unauthorized", "缺少管理员令牌")
 			return
@@ -49,8 +42,25 @@ func (s *Server) adminAuth(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+// adminToken 统一解析管理端令牌：优先 X-Admin-Token，回退 Authorization: Bearer。
+// adminAuth 与 handleAdminLogout 共用，保证鉴权与吊销使用同一套解析规则。
+func adminToken(r *http.Request) string {
+	if tok := strings.TrimSpace(r.Header.Get("X-Admin-Token")); tok != "" {
+		return tok
+	}
+	auth := strings.TrimSpace(r.Header.Get("Authorization"))
+	const prefix = "bearer "
+	if strings.EqualFold(auth, "bearer") {
+		return ""
+	}
+	if len(auth) >= len(prefix) && strings.EqualFold(auth[:len(prefix)], prefix) {
+		return strings.TrimSpace(auth[len(prefix):])
+	}
+	return auth
+}
+
 func adminOf(r *http.Request) (string, string) {
-	v, _ := r.Context().Value(ctxAdmin).([2]string)
+	v, _ := r.Context().Value(adminCtxKey{}).([2]string)
 	return v[0], v[1]
 }
 
@@ -107,9 +117,11 @@ func (s *Server) handleAdminLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleAdminLogout(w http.ResponseWriter, r *http.Request) {
-	tok := strings.TrimSpace(r.Header.Get("X-Admin-Token"))
-	if claims, err := s.jwt.ParseAdmin(tok); err == nil {
-		_ = s.db.RevokeAdminToken(claims.ID)
+	tok := adminToken(r)
+	if tok != "" {
+		if claims, err := s.jwt.ParseAdmin(tok); err == nil {
+			_ = s.db.RevokeAdminToken(claims.ID)
+		}
 	}
 	writeJSON(w, http.StatusOK, map[string]bool{"ok": true})
 }
@@ -464,7 +476,7 @@ func (s *Server) handleAdminGetVersion(w http.ResponseWriter, r *http.Request) {
 	v, err := s.db.LatestVersion()
 	if err != nil {
 		writeJSON(w, http.StatusOK, map[string]any{
-			"latestVersion": "1.0.0", "minVersion": "1.0.0",
+			"latestVersion": "1.0.0", "minVersion": "1.0.0", "versionCode": 0,
 			"updateUrl": "", "updateSha256": "", "updateNotes": "",
 			"forceUpdate": false, "publishedAt": "",
 		})
@@ -639,20 +651,36 @@ func lastActiveOf(devices []db.Device, lastLogin int64) int64 {
 	return max
 }
 
+// trustProxy 读取 XG_TRUST_PROXY，默认不信任任何代理；仅 1/true 开启。
+func trustProxy() bool {
+	switch lower(strings.TrimSpace(os.Getenv("XG_TRUST_PROXY"))) {
+	case "1", "true", "yes", "on":
+		return true
+	}
+	return false
+}
 
+// clientIP 返回请求来源 IP。
+// 仅当显式开启 XG_TRUST_PROXY 且 RemoteAddr 本身是内网/回环（可信反代）时，
+// 才采信 X-Forwarded-For / X-Real-IP；否则一律以 RemoteAddr 为准。
 func clientIP(r *http.Request) string {
+	host, _, err := net.SplitHostPort(strings.TrimSpace(r.RemoteAddr))
+	if err != nil {
+		host = strings.TrimSpace(r.RemoteAddr)
+	}
+	if !trustProxy() || !isInternalIP(host) {
+		return host
+	}
 	if v := strings.TrimSpace(r.Header.Get("X-Forwarded-For")); v != "" {
 		if i := strings.Index(v, ","); i > 0 {
 			v = v[:i]
 		}
-		return strings.TrimSpace(v)
+		if first := strings.TrimSpace(v); first != "" {
+			return first
+		}
 	}
 	if v := strings.TrimSpace(r.Header.Get("X-Real-IP")); v != "" {
 		return v
-	}
-	host, _, err := net.SplitHostPort(strings.TrimSpace(r.RemoteAddr))
-	if err != nil {
-		return r.RemoteAddr
 	}
 	return host
 }
