@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 下载页搜索输入框（P7）：低调的圆角浅底，与搜索页保持同一视觉语言 -->
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/surface_muted" />
+    <corners android:radius="@dimen/radius_pill" />
+</shape>

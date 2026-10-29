@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 定时档位「已选中」态：品牌色实底 + 白字，与未选中的 surface_muted 拉开对比。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="@dimen/radius_pill" />
+    <solid android:color="@color/brand" />
+</shape>

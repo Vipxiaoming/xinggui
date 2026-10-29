@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/surface" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:paddingTop="8.0dip" android:paddingBottom="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="4.0">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/btnFuncDownload" android:background="?android:selectableItemBackgroundBorderless" android:focusable="true" android:clickable="true" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <FrameLayout android:background="@drawable/bg_func_circle" android:layout_width="48.0dip" android:layout_height="48.0dip">
+                <ImageView android:layout_gravity="center" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_func_download" />
+            </FrameLayout>
+            <TextView android:textSize="12.0sp" android:textColor="@color/ink_700" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="下载" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/btnFuncMV" android:background="?android:selectableItemBackgroundBorderless" android:focusable="true" android:clickable="true" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <FrameLayout android:background="@drawable/bg_func_circle" android:layout_width="48.0dip" android:layout_height="48.0dip">
+                <ImageView android:layout_gravity="center" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_func_mv" />
+            </FrameLayout>
+            <TextView android:textSize="12.0sp" android:textColor="@color/ink_700" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="MV" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/btnFuncRank" android:background="?android:selectableItemBackgroundBorderless" android:focusable="true" android:clickable="true" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <FrameLayout android:background="@drawable/bg_func_circle" android:layout_width="48.0dip" android:layout_height="48.0dip">
+                <ImageView android:layout_gravity="center" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_func_rank" />
+            </FrameLayout>
+            <TextView android:textSize="12.0sp" android:textColor="@color/ink_700" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="排行榜" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/btnFuncPlaylistSquare" android:background="?android:selectableItemBackgroundBorderless" android:focusable="true" android:clickable="true" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <FrameLayout android:background="@drawable/bg_func_circle" android:layout_width="48.0dip" android:layout_height="48.0dip">
+                <ImageView android:layout_gravity="center" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_func_folder" />
+            </FrameLayout>
+            <TextView android:textSize="12.0sp" android:textColor="@color/ink_700" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="歌单广场" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:id="@+id/btnHeaderHotRank" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+            <TextView android:textSize="18.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="热门榜单" android:includeFontPadding="false" android:layout_centerVertical="true" android:fontFamily="sans-serif-medium" android:layout_alignParentStart="true" />
+            <TextView android:textSize="13.0sp" android:textColor="@color/ink_500" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="每日同步更新" android:drawablePadding="2.0dip" android:layout_centerVertical="true" android:drawableEnd="@drawable/ic_chevron_right" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+            <LinearLayout android:orientation="vertical" android:id="@+id/cardRankSurge" android:background="@drawable/bg_rank_card_purple" android:padding="14.0dip" android:focusable="true" android:clickable="true" android:layout_width="0.0dip" android:layout_height="95.0dip" android:layout_weight="1.0" android:layout_marginEnd="5.0dip">
+                <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <TextView android:textSize="17.0sp" android:textColor="@color/on_brand" android:id="@+id/tvCardSurgeTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="飙升榜" android:fontFamily="sans-serif-medium" />
+                    <TextView android:textSize="11.0sp" android:textColor="@color/on_brand" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="实时热度暴涨" android:layout_below="@id/tvCardSurgeTitle" />
+                    <TextView android:textSize="12.0sp" android:textColor="@color/on_brand" android:ellipsize="end" android:id="@+id/tvCardSurgeSong" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="1. 正在加载..." android:maxLines="1" android:layout_alignParentBottom="true" android:layout_marginEnd="6.0dip" android:layout_toStartOf="@id/ivSurgeCover" />
+                    <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivSurgeCover" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/bg_album_default" android:scaleType="centerCrop" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" app:shapeAppearanceOverlay="@style/RoundedCornerImageView" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@+id/cardRankHot" android:background="@drawable/bg_rank_card_red" android:padding="14.0dip" android:focusable="true" android:clickable="true" android:layout_width="0.0dip" android:layout_height="95.0dip" android:layout_weight="1.0" android:layout_marginStart="5.0dip">
+                <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <TextView android:textSize="17.0sp" android:textColor="@color/on_brand" android:id="@+id/tvCardHotTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="热歌榜" android:fontFamily="sans-serif-medium" />
+                    <TextView android:textSize="11.0sp" android:textColor="@color/on_brand" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="全网畅听TOP500" android:layout_below="@id/tvCardHotTitle" />
+                    <TextView android:textSize="12.0sp" android:textColor="@color/on_brand" android:ellipsize="end" android:id="@+id/tvCardHotSong" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="1. 正在加载..." android:maxLines="1" android:layout_alignParentBottom="true" android:layout_marginEnd="6.0dip" android:layout_toStartOf="@id/ivHotCover" />
+                    <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivHotCover" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/bg_album_default" android:scaleType="centerCrop" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" app:shapeAppearanceOverlay="@style/RoundedCornerImageView" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+            <TextView android:textSize="18.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="热门歌单" android:includeFontPadding="false" android:layout_centerVertical="true" android:fontFamily="sans-serif-medium" android:layout_alignParentStart="true" />
+            <TextView android:textSize="13.0sp" android:textColor="@color/ink_500" android:id="@+id/btnMorePlaylist" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="歌单广场" android:drawablePadding="2.0dip" android:layout_centerVertical="true" android:drawableEnd="@drawable/ic_chevron_right" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView android:orientation="horizontal" android:id="@+id/rvHotPlaylists" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:paddingStart="16.0dip" android:paddingEnd="6.0dip" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@+id/layoutSectionNewSongsHeader" android:paddingTop="6.0dip" android:paddingBottom="6.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+            <TextView android:textSize="17.0sp" android:textColor="@color/ink_900" android:id="@+id/tvSectionTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="新歌速递" android:layout_centerVertical="true" android:fontFamily="sans-serif-medium" android:layout_alignParentStart="true" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/ink_700" android:gravity="center" android:id="@+id/btnRefreshNewSongs" android:background="@drawable/bg_refresh_chip_outline" android:layout_width="wrap_content" android:layout_height="28.0dip" android:text="刷新" android:layout_centerVertical="true" android:paddingStart="10.0dip" android:paddingEnd="10.0dip" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

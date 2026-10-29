@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CircleImageViewStyle">
+        <item name="cornerSize">50.0%</item>
+    </style>
+    <style name="CustomBottomSheetStyle" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <style name="RoundedCorner16ImageView">
+        <item name="cornerSize">16.0dip</item>
+    </style>
+    <style name="RoundedCorner6ImageView">
+        <item name="cornerSize">8.0dip</item>
+    </style>
+    <style name="RoundedCornerImageView">
+        <item name="cornerSize">10.0dip</item>
+    </style>
+    <style name="RoundedCornerImageViewStyle">
+        <item name="cornerSize">12.0dip</item>
+    </style>
+    <style name="RoundedCorner12ImageView">
+        <item name="cornerSize">12.0dip</item>
+    </style>
+</resources>

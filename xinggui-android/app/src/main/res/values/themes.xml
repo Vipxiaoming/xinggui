@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- P2 应用主题：Material3 DayNight，无 ActionBar。
+         原版 AppTheme 的 windowBackground/statusBar/navigationBar 全部指向 @color/surface，
+         这里保持同样做法，使明暗切换由 values-night 的 surface 自动完成。 -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand</item>
+        <item name="colorOnPrimary">@color/on_brand</item>
+        <item name="colorPrimaryContainer">@color/brand_soft</item>
+        <item name="colorOnPrimaryContainer">@color/brand_deep</item>
+        <item name="colorSecondary">@color/brand_light</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface_muted</item>
+        <item name="colorOnSurface">@color/ink_900</item>
+        <item name="colorOnSurfaceVariant">@color/ink_600</item>
+        <item name="colorOutline">@color/line</item>
+        <item name="colorError">@color/danger</item>
+
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+        <item name="android:alertDialogTheme">@style/AuroraDialogTheme</item>
+        <item name="alertDialogTheme">@style/AuroraDialogTheme</item>
+    </style>
+
+    <!-- 弹层：原版 24dp 圆角 + 玻璃描边 -->
+    <style name="AuroraDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/AuroraDialogShape</item>
+    </style>
+
+    <style name="AuroraDialogShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_dialog</item>
+    </style>
+
+    <!-- 底部弹层：透明背景，由布局自绘玻璃底 -->
+    <style name="AuroraBottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="behavior_hideable">true</item>
+        <item name="behavior_draggable">true</item>
+    </style>
+
+    <!-- 启动页：原版 splash 用的是 Capacitor 默认蓝底 X，这里改成品牌色底 + 星轨图标 -->
+    <style name="AppTheme.Splash" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+</resources>

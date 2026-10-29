@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="48.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:background="#332f6bff" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_centerVertical="true" android:layout_marginEnd="10.0dip" android:layout_toStartOf="@id/tvCursorTime" />
+    <TextView android:textSize="13.0sp" android:textColor="@color/brand" android:id="@+id/tvCursorTime" android:background="@android:color/transparent" android:paddingTop="4.0dip" android:paddingBottom="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00:00" android:layout_centerVertical="true" android:fontFamily="sans-serif-medium" android:paddingStart="4.0dip" android:paddingEnd="4.0dip" android:layout_alignParentEnd="true" />
+</RelativeLayout>

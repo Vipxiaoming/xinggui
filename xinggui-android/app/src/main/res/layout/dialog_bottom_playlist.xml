@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/bg_bottom_sheet_dialog" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:layout_gravity="center_horizontal" android:background="@color/ink_300" android:layout_width="36.0dip" android:layout_height="4.0dip" android:layout_marginTop="10.0dip" android:layout_marginBottom="4.0dip" />
+    <RelativeLayout android:gravity="center_vertical" android:id="@+id/dialogHeaderLayout" android:layout_width="fill_parent" android:layout_height="56.0dip" android:paddingStart="20.0dip" android:paddingEnd="16.0dip">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/btnPlayModeHeader" android:background="?android:selectableItemBackground" android:layout_width="wrap_content" android:layout_height="fill_parent" android:paddingStart="4.0dip" android:paddingEnd="12.0dip">
+            <ImageView android:id="@+id/ivPlayModeIcon" android:layout_width="22.0dip" android:layout_height="22.0dip" android:src="@drawable/ic_play_mode_repeat" />
+            <TextView android:textSize="15.0sp" android:textColor="@color/ink_900" android:id="@+id/tvPlayModeTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="顺序播放 (0)" android:layout_marginStart="8.0dip" />
+        </LinearLayout>
+        <ImageView android:id="@+id/btnClearAll" android:background="?android:selectableItemBackgroundBorderless" android:padding="8.0dip" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/ic_trash_clean" android:layout_centerVertical="true" android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <View android:background="@color/line" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvPlaylistDialog" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" android:overScrollMode="never" />
+    <View android:layout_width="fill_parent" android:layout_height="28.0dip" />
+</LinearLayout>

@@ -1,0 +1,12 @@
+*.iml
+.gradle/
+build/
+local.properties
+.idea/
+*.hprof
+.DS_Store
+diag/
+build-*.log
+# Release signing: keystore + credentials must never be committed
+keystore/
+keystore.properties

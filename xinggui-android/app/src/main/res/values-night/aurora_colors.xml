@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_soft">#ff1a2340</color>
+    <color name="brand_tint">#ff26355c</color>
+    <color name="dialog_edge">#24ffffff</color>
+    <color name="dialog_shadow">#66000000</color>
+    <color name="glass_stroke">#1fffffff</color>
+    <color name="ink_200">#ff34383e</color>
+    <color name="ink_300">#ff4e535b</color>
+    <color name="ink_400">#ff6b7078</color>
+    <color name="ink_500">#ff8a9099</color>
+    <color name="ink_600">#ff959ba4</color>
+    <color name="ink_700">#ffb4b9c1</color>
+    <color name="ink_900">#ffedeff3</color>
+    <color name="line">#ff24272c</color>
+    <color name="line_soft">#ff1b1e23</color>
+    <color name="surface">#ff16181d</color>
+    <color name="surface_muted">#ff1e2127</color>
+    <color name="surface_sunken">#ff101216</color>
+</resources>

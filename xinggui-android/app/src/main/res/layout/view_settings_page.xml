@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/surface" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="56.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+        <ImageView android:id="@+id/btnBackFromSettings" android:background="?android:selectableItemBackgroundBorderless" android:padding="6.0dip" android:visibility="gone" android:layout_width="32.0dip" android:layout_height="32.0dip" android:src="@drawable/ic_back_arrow" android:layout_centerVertical="true" android:layout_alignParentStart="true" />
+        <TextView android:textSize="18.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="设置" android:includeFontPadding="false" android:layout_centerVertical="true" android:fontFamily="sans-serif-medium" android:layout_alignParentStart="true" />
+    </RelativeLayout>
+    <View android:background="@color/line" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:paddingTop="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/itemSettingDownloadPath" android:background="?android:selectableItemBackground" android:layout_width="fill_parent" android:layout_height="56.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <TextView android:textSize="15.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="下载保存路径" />
+                    <TextView android:textSize="12.0sp" android:textColor="@color/ink_500" android:ellipsize="middle" android:id="@+id/tvSettingDownloadPathSub" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="/Download/星轨/" android:maxLines="1" />
+                </LinearLayout>
+                <ImageView android:id="@+id/btnPickDownloadFolder" android:background="?android:selectableItemBackgroundBorderless" android:padding="6.0dip" android:layout_width="36.0dip" android:layout_height="36.0dip" android:src="@drawable/ic_func_folder" android:tint="@color/brand" />
+            </LinearLayout>
+            <View android:background="@color/surface_muted" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" android:layout_marginStart="16.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/itemSettingQuality" android:background="?android:selectableItemBackground" android:layout_width="fill_parent" android:layout_height="56.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <TextView android:textSize="15.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="在线播放与下载音质" />
+                    <TextView android:textSize="12.0sp" android:textColor="@color/ink_500" android:id="@+id/tvSettingQualitySub" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="标准音质 (128Kbps)" />
+                </LinearLayout>
+                <ImageView android:layout_gravity="center_vertical" android:layout_width="16.0dip" android:layout_height="16.0dip" android:src="@drawable/ic_chevron_right" />
+            </LinearLayout>
+            <View android:background="@color/surface_muted" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" android:layout_marginStart="16.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/itemSettingMaxConcurrentDownloads" android:background="?android:selectableItemBackground" android:layout_width="fill_parent" android:layout_height="56.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <TextView android:textSize="15.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="同时下载任务数" />
+                    <TextView android:textSize="12.0sp" android:textColor="@color/ink_500" android:id="@+id/tvSettingConcurrentCountSub" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="同时下载 3 首 (可设置 1-10 个)" />
+                </LinearLayout>
+                <ImageView android:layout_gravity="center_vertical" android:layout_width="16.0dip" android:layout_height="16.0dip" android:src="@drawable/ic_chevron_right" />
+            </LinearLayout>
+            <View android:background="@color/surface_muted" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" android:layout_marginStart="16.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/itemSettingBatchDownloadBtn" android:background="?android:selectableItemBackground" android:layout_width="fill_parent" android:layout_height="64.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <TextView android:textSize="15.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="批量下载悬浮按钮" android:fontFamily="sans-serif-medium" />
+                    <TextView android:textSize="12.0sp" android:textColor="@color/ink_500" android:id="@+id/tvSettingBatchDownloadSub" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="开启后在歌单与歌曲列表显示可拖动多选下载按钮" />
+                </LinearLayout>
+                <androidx.appcompat.widget.SwitchCompat android:id="@+id/switchSettingBatchDownload" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" />
+            </LinearLayout>
+            <View android:background="@color/surface_muted" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" android:layout_marginStart="16.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/itemSettingLocalSongs" android:background="?android:selectableItemBackground" android:layout_width="fill_parent" android:layout_height="56.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <TextView android:textSize="15.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="本地歌曲" />
+                    <TextView android:textSize="12.0sp" android:textColor="@color/ink_500" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="仅扫描当前下载目录中的音频" />
+                </LinearLayout>
+                <ImageView android:layout_gravity="center_vertical" android:layout_width="16.0dip" android:layout_height="16.0dip" android:src="@drawable/ic_chevron_right" />
+            </LinearLayout>
+            <View android:background="@color/surface_muted" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" android:layout_marginStart="16.0dip" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

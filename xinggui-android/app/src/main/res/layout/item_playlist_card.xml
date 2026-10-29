@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="6.0dip" android:layout_marginStart="4.0dip" android:layout_marginEnd="4.0dip" app:cardBackgroundColor="@android:color/transparent" app:cardCornerRadius="12.0dip" app:cardElevation="0.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:id="@+id/layoutCoverContainer" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivPlaylistCover" android:layout_width="fill_parent" android:layout_height="110.0dip" android:src="@drawable/bg_album_default" android:scaleType="centerCrop" app:shapeAppearanceOverlay="@style/RoundedCornerImageViewStyle" />
+            <View android:background="@drawable/bg_gradient_top_shadow" android:layout_width="fill_parent" android:layout_height="40.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/bg_playcount_badge" android:paddingTop="3.0dip" android:paddingBottom="3.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:layout_alignParentTop="true" android:paddingStart="7.0dip" android:paddingEnd="8.0dip" android:layout_marginEnd="6.0dip" android:layout_alignParentEnd="true">
+                <ImageView android:layout_width="10.0dip" android:layout_height="10.0dip" android:src="@drawable/ic_drop_playcount" />
+                <TextView android:textSize="10.0sp" android:textColor="@color/on_brand" android:id="@+id/tvPlayCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="182.5万" android:fontFamily="sans-serif-medium" android:layout_marginStart="3.0dip" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/bg_cursor_badge" android:paddingTop="2.0dip" android:paddingBottom="2.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip" android:layout_alignBottom="@id/ivPlaylistCover" android:paddingStart="6.0dip" android:paddingEnd="6.0dip" android:layout_marginStart="6.0dip" android:layout_alignParentStart="true">
+                <TextView android:textSize="10.0sp" android:textColor="@color/on_brand" android:id="@+id/tvTrackCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="35首" android:fontFamily="sans-serif-medium" />
+            </LinearLayout>
+            <ImageView android:background="@drawable/bg_circle_translucent" android:padding="6.0dip" android:layout_width="26.0dip" android:layout_height="26.0dip" android:layout_marginBottom="6.0dip" android:src="@drawable/ic_player_play" android:layout_alignBottom="@id/ivPlaylistCover" android:layout_marginEnd="6.0dip" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <TextView android:textSize="12.0sp" android:textColor="@color/ink_900" android:ellipsize="end" android:id="@+id/tvPlaylistTitle" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="精选华语流行热歌合集" android:maxLines="2" android:lineSpacingExtra="1.0dip" android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

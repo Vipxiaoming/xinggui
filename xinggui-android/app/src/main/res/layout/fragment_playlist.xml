@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 歌单 Tab：直接复用原版 view_tab_playlist_page（搜索栏 + 解析结果卡 + 自建歌单列表 + 空态）。 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface">
+
+    <include
+        android:id="@+id/playlistTabContent"
+        layout="@layout/view_tab_playlist_page" />
+</FrameLayout>

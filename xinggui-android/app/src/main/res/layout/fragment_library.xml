@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  下载 Tab。上半部是「搜索并下载」入口面板（P7 新增），下半部复用原版
+  view_tab_library_page 的两张入口卡（已下载歌曲 / 下载任务管理）。
+  之所以把搜索面板放进下载页而不是改 ui/search：ui/search 不在 P7 写作用域内，
+  且「先搜后下」本来就是下载场景的主路径。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_sunken">
+
+    <include
+        android:id="@+id/libraryTabContent"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        layout="@layout/view_tab_library_page" />
+    <!-- 搜索并下载：常驻在入口卡下方，避免用户为了下载先跳搜索页再回来 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/surface"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <TextView
+                android:textSize="15sp"
+                android:textColor="@color/ink_900"
+                android:layout_width="wrap_content"
+                android:layout_height="280dp"
+                android:text="搜索并下载"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/tvDownloadPanelHint"
+                android:textSize="12sp"
+                android:textColor="@color/ink_500"
+                android:layout_width="0dp"
+                android:layout_height="280dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <EditText
+                android:id="@+id/etDownloadQuery"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_input_rounded"
+                android:hint="歌名 / 歌手"
+                android:textSize="14sp"
+                android:textColor="@color/ink_900"
+                android:textColorHint="@color/ink_400"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/btnDownloadSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center"
+                android:background="@drawable/bg_btn_brand"
+                android:text="搜索"
+                android:textSize="14sp"
+                android:textColor="@color/on_brand"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/ink_400"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginTop="2dp"
+            android:text="点结果即下载到 Download/星轨/" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDownloadPick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tvDownloadPickEmpty"
+                android:textSize="13sp"
+                android:textColor="@color/ink_500"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="280dp"
+                android:text="输入关键词搜索，点结果直接下载" />
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

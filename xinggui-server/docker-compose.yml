@@ -1,0 +1,42 @@
+# ============================================================
+# 星轨音乐服务端 docker compose（生产）
+#   启动： docker compose up -d
+#   日志： docker logs -f xinggui
+#   证书目录 ./certs 不入库，需在部署机本地准备
+# ============================================================
+services:
+  xinggui:
+    image: ghcr.io/vipxiaoming/xinggui-server:latest
+    container_name: xinggui
+    restart: unless-stopped
+    ports:
+      # 注意：若公网入口是 music.wangxiaoming.vip:20001，请改成 "20001:8443"。
+      # 当前值按需求文档保留 8443 -> 8443。
+      - "8443:8443"
+    volumes:
+      - ./data:/app/data
+      - ./certs:/app/certs:ro
+    environment:
+      XG_PORT: "8443"
+      XG_DATA_DIR: "/app/data"
+      XG_BASE_URL: "https://music.wangxiaoming.vip:20001"
+      XG_CORS_ORIGINS: "https://music.wangxiaoming.vip:20001"
+      XG_TLS_CERT: "/app/certs/fullchain.pem"
+      XG_TLS_KEY: "/app/certs/privkey.pem"
+      TZ: "Asia/Shanghai"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          curl -fsS -k -o /dev/null
+          "https://127.0.0.1:${XG_PORT:-8443}/v1/health" ||
+          curl -fsS -o /dev/null "http://127.0.0.1:${XG_PORT:-8443}/v1/health"
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

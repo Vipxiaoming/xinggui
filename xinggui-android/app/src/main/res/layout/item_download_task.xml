@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/bg_item_song_ripple" android:layout_width="fill_parent" android:layout_height="68.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivCover" android:layout_width="52.0dip" android:layout_height="52.0dip" android:src="@drawable/bg_album_default" android:scaleType="centerCrop" app:shapeAppearanceOverlay="@style/RoundedCornerImageView" />
+    <RelativeLayout android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:layout_marginStart="14.0dip" android:layout_marginEnd="8.0dip">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerVertical="true">
+            <TextView android:textSize="16.0sp" android:textColor="@color/ink_900" android:ellipsize="end" android:id="@+id/tvTitle" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="歌曲名称" android:singleLine="true" android:fontFamily="sans-serif-medium" />
+            <TextView android:textSize="13.0sp" android:textColor="@color/ink_500" android:ellipsize="end" android:id="@+id/tvArtist" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:text="歌手名" android:singleLine="true" />
+            <ProgressBar android:id="@+id/pbDownloadTask" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="4.0dip" android:layout_marginTop="5.0dip" android:max="100" android:progress="0" android:progressDrawable="@drawable/bg_progress_rounded" style="?android:progressBarStyleHorizontal" />
+        </LinearLayout>
+        <View android:background="@color/surface_muted" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+    <TextView android:textSize="12.0sp" android:textColor="@color/success" android:id="@+id/tvTaskStatus" android:paddingTop="3.0dip" android:paddingBottom="3.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="已完成" android:paddingStart="8.0dip" android:paddingEnd="8.0dip" />
+    <ImageView android:id="@+id/btnDeleteTask" android:background="?android:selectableItemBackgroundBorderless" android:padding="4.0dip" android:layout_width="28.0dip" android:layout_height="28.0dip" android:src="@drawable/ic_trash_clean" android:tint="@color/ink_400" android:layout_marginStart="8.0dip" />
+</LinearLayout>

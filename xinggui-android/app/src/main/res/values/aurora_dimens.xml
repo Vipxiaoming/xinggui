@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="radius_bar">2.0dip</dimen>
+    <dimen name="radius_dialog">24.0dip</dimen>
+    <dimen name="radius_lg">20.0dip</dimen>
+    <dimen name="radius_md">16.0dip</dimen>
+    <dimen name="radius_pill">100.0dip</dimen>
+    <dimen name="radius_sm">12.0dip</dimen>
+    <dimen name="radius_xs">6.0dip</dimen>
+    <dimen name="stroke_hairline">0.5dip</dimen>
+    <dimen name="stroke_normal">1.0dip</dimen>
+</resources>

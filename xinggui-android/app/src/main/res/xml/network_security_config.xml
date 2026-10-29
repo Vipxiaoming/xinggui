@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  真机联调需要「用户在 App 内自填服务端地址」，所以 base-config 放开明文：
+  用户的服务端可能是局域网 http://192.168.x.x:9443，域名无法预知，
+  按域名白名单的做法必然覆盖不到。
+
+  代价与补偿：
+    - 生产域名 music.wangxiaoming.vip 单独用 domain-config 钉死
+      cleartextTrafficPermitted="false"，即使 base-config 放开，生产基址也不会被降级成 http。
+    - 上游音源（酷狗 CDN）维持原样的明文放行，行为不变。
+
+  注意：Android 的优先级是 networkSecurityConfig > usesCleartextTraffic，
+  两者同时存在时以本文件为准；manifest 里的 usesCleartextTraffic="true"
+  只是为了 API 23 及以下的兜底与阅读一致性。
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+
+    <!-- 生产基址强制 HTTPS：域名级 false 覆盖 base-config 的 true -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">music.wangxiaoming.vip</domain>
+    </domain-config>
+
+    <!-- 实测 HTTPS 握手失败（证书 CN 与域名不符），原版同样走 http -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">mobilecdn.kugou.com</domain>
+        <domain includeSubdomains="false">mobilecdnbj.kugou.com</domain>
+        <domain includeSubdomains="false">10.0.2.2</domain>
+        <domain includeSubdomains="false">127.0.0.1</domain>
+        <domain includeSubdomains="false">localhost</domain>
+    </domain-config>
+</network-security-config>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  P2 空壳骨架版 activity_main。
+
+  与 apktool-out 原版的差异（原版完整副本见 docs/layout-reference/activity_main.full.xml）：
+   1. 删除全部业务区块：home 头部/滚动区、搜索结果页、二级页容器内的歌单详情、全屏播放器、
+      批量下载条、悬浮球、MV 两个 include、设置页/下载历史/4 个 tab 页/登录门的 include。
+   2. 保留 statusBarPadding、miniPlayerLayout（含 2 个 SynchronizedMarqueeTextView）、bottomNavLayout（4 tab）。
+   3. 新增 contentContainer：P3 起 Fragment 挂载点，替代原来"平铺 + setVisibility"的做法。
+   4. 原 93 个 ID 中 27 个保留（见 reports/11-layout-id-map.md 2.1），其余下沉到各 Fragment 布局。
+
+  视觉按原版 1:1 保留：mini 播放器 60dp 胶囊、底部导航 56dp + 0.5dp 发丝分隔线、图标 24dp + 12sp 文字。
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface">
+
+    <View
+        android:id="@+id/statusBarPadding"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/surface" />
+
+    <FrameLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/miniPlayerLayout"
+        android:layout_below="@+id/statusBarPadding" />
+
+    <!-- P6：全屏播放器覆盖层。默认 GONE，openPlayer 时置 VISIBLE 并挂 PlayerFragment。 -->
+    <FrameLayout
+        android:id="@+id/playerHost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/surface"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/miniPlayerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/bottomNavLayout"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_mini_player_capsule"
+        android:elevation="6dp"
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvMiniEmptyNotice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="@string/mini_empty_notice"
+            android:textColor="@color/ink_500"
+            android:textSize="14sp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/miniCover"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_album_default"
+            android:visibility="gone"
+            app:shapeAppearanceOverlay="@style/RoundedCorner6ImageView" />
+
+        <LinearLayout
+            android:id="@+id/layoutMiniInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/miniCover"
+            android:layout_toStartOf="@+id/controlsLayout"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <vip.wangxiaoming.music.ui.widget.SynchronizedMarqueeTextView
+                android:id="@+id/miniTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:fontFamily="sans-serif-medium"
+                android:singleLine="true"
+                android:text="歌曲名称"
+                android:textColor="@color/ink_900"
+                android:textSize="14sp" />
+
+            <vip.wangxiaoming.music.ui.widget.SynchronizedMarqueeTextView
+                android:id="@+id/miniArtist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="none"
+                android:singleLine="true"
+                android:text="歌手名称"
+                android:textColor="@color/ink_500"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/controlsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/btnPlayPause"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:background="@drawable/bg_player_btn_ripple"
+                android:contentDescription="@string/mini_play"
+                android:src="@drawable/ic_player_play_line" />
+
+            <ImageView
+                android:id="@+id/btnMiniPlaylist"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/bg_player_btn_ripple"
+                android:contentDescription="@string/mini_playlist"
+                android:src="@drawable/ic_playlist_menu"
+                android:tint="@color/ink_900" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/miniProgressBar"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:max="100"
+            android:progress="0"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomNavLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/surface"
+        android:elevation="0dp"
+        android:minHeight="56dp"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/bottomNavTopDivider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/stroke_hairline"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:id="@+id/navTabHome"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivNavHome"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_tab_home"
+                    android:tint="@color/brand" />
+
+                <TextView
+                    android:id="@+id/tvNavHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/nav_home"
+                    android:textColor="@color/brand"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navTabPlaylist"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivNavPlaylist"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_tab_playlist"
+                    android:tint="@color/ink_400" />
+
+                <TextView
+                    android:id="@+id/tvNavPlaylist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/nav_playlist"
+                    android:textColor="@color/ink_400"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navTabLibrary"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivNavLibrary"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_func_download"
+                    android:tint="@color/ink_400" />
+
+                <TextView
+                    android:id="@+id/tvNavLibrary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/nav_library"
+                    android:textColor="@color/ink_400"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navTabMine"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivNavMine"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_tab_mine"
+                    android:tint="@color/ink_400" />
+
+                <TextView
+                    android:id="@+id/tvNavMine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/nav_mine"
+                    android:textColor="@color/ink_400"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

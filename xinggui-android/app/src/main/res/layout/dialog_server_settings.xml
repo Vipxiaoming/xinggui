@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  服务器设置对话框（真机联调用）。
+  只复用现有配色/圆角 drawable，不引入新依赖；三个动作按钮由 AlertDialog 的
+  positive/negative/neutral 提供（保存 / 恢复默认 / 测试连接）。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="20.0dip"
+    android:paddingEnd="20.0dip"
+    android:paddingTop="8.0dip"
+    android:paddingBottom="4.0dip">
+
+    <TextView
+        android:id="@+id/tvServerCurrent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12.0sp"
+        android:textColor="@color/ink_500"
+        android:text="当前生效：-" />
+
+    <EditText
+        android:id="@+id/etServerUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12.0dip"
+        android:background="@drawable/bg_input_rounded"
+        android:paddingStart="14.0dip"
+        android:paddingEnd="14.0dip"
+        android:paddingTop="12.0dip"
+        android:paddingBottom="12.0dip"
+        android:textSize="14.0sp"
+        android:textColor="@color/ink_900"
+        android:textColorHint="@color/ink_400"
+        android:hint="https://example.com:8443"
+        android:inputType="textUri"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/tvServerHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:textSize="11.0sp"
+        android:textColor="@color/ink_400"
+        android:text="必须以 http:// 或 https:// 开头，可带端口；不要带路径、查询串。" />
+
+    <TextView
+        android:id="@+id/tvServerResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.0dip"
+        android:textSize="12.0sp"
+        android:textColor="@color/ink_700"
+        android:visibility="gone" />
+</LinearLayout>

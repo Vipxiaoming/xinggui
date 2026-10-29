@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 随机播放图标。原版 P2 只搬了 loop(顺序) 与 repeat(单曲) 两个，
+     导致三档模式里随机和顺序共用同一图标、用户看不出区别。
+     这里按同一套线稿风格补齐：1.8 描边、圆头、24dp 画布。 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M3,7h3.5c1.2,0 2.3,0.6 3,1.6l4,5.8c0.7,1 1.8,1.6 3,1.6H20"
+        android:strokeColor="@color/ink_900"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M3,17h3.5c1.2,0 2.3,-0.6 3,-1.6l1,-1.4"
+        android:strokeColor="@color/ink_900"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M13.5,9.2l1,-1.4C15.2,6.8 16.3,6.2 17.5,6.2H20"
+        android:strokeColor="@color/ink_900"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M17.6,3.8L20,6.2l-2.4,2.4"
+        android:strokeColor="@color/ink_900"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M17.6,13.4L20,15.8l-2.4,2.4"
+        android:strokeColor="@color/ink_900"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

@@ -1,0 +1,123 @@
+# ============================================================
+# 星轨音乐 (xinggui) 仓库 .gitignore
+# 原则：源码进仓库，构建产物 / 数据 / 密钥 / 证书 一律不进。
+# 任何一次 `git add .` 之前请先 `git status --short` 人工复核。
+# ============================================================
+
+# ---------- 构建产物 ----------
+**/build/
+**/.gradle/
+**/.kotlin/
+**/node_modules/
+**/*.exe
+**/*.exe~
+**/*.apk
+**/*.aab
+**/*.dll
+**/*.so
+**/*.dylib
+**/*.class
+**/*.jar.tmp
+# 注意：xinggui-android/gradle/wrapper/gradle-wrapper.jar 需保留，勿整体忽略 *.jar
+
+# ---------- 服务端数据与密钥 ----------
+# 服务端全部 data* 目录（data / data2 / data21 / data-it / data-verify / data-p6-verify ...）
+# 含 xinggui.db、jwt.secret、*.token-* 等真实用户数据与密钥
+xinggui-server/data*/
+xinggui-server/*.db
+xinggui-server/*.db-wal
+xinggui-server/*.db-shm
+**/jwt.secret
+**/*.token-*
+# 工作区根目录的测试令牌文件
+*.p9-admin-token
+.token-it
+.token-user-it
+
+# ---------- Android 签名 ----------
+xinggui-android/keystore/
+xinggui-android/keystore.properties
+**/*.jks
+**/*.keystore
+xinggui-android/local.properties
+
+# ---------- 证书与私钥 ----------
+# 证书只存在于部署机本地，绝不入库
+**/certs/
+**/*.pem
+**/*.key
+**/*.crt
+**/*.cer
+**/*.der
+**/*.p7b
+**/*.pfx
+**/*.p12
+xinggui-android/evidence/
+
+# ---------- 根目录临时文件（本次整理之前的调试残留） ----------
+p7-*.png
+p7-*.log
+build-p7.log
+ui*.xml
+u?.xml
+z?.xml
+*.log
+body-reg.json
+selftest-result.json
+shot.ps1
+it-*.ps1
+it-live-node.js
+# 根目录四个异常文件名文件（PowerShell 重定向误产生的垃圾）
+(Join-Path
+$null
+环境：emulator-5554（1080x2400
+60
+
+# ---------- 管理端本地调试产物 ----------
+xinggui-admin/_fix39/
+xinggui-admin/_shots/
+xinggui-admin/it-cred.json
+xinggui-admin/*.log
+
+# ---------- 服务端本地脚本与抓包残留 ----------
+xinggui-server/chrome-p6/
+xinggui-server/chrome-*/
+xinggui-server/*.bak
+xinggui-server/*.bat
+xinggui-server/selftest-output.txt
+xinggui-server/p8-setup.json
+
+# ---------- 分析报告（体积大且含内部路径/细节，不进仓库） ----------
+aurora-music-analysis/
+
+# ---------- 编辑器 / 操作系统 ----------
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 本地环境与日志 ----------
+.env
+.env.*
+!.env.example
+.mcp.json
+
+# ---------- 浏览器自动化残留（含 Cookies / Login Data，绝对不能入库） ----------
+.chrome-it2/
+.chrome-*/
+**/.chrome-*/
+
+# ---------- 内部调试脚本目录 ----------
+.p9/
+xinggui-server/*.ps1
+xinggui-server/*.txt
+
+# ---------- 二进制备份（*.bak-pre-cors 等） ----------
+**/*.bak-pre-*
+**/*.bak-signing
+**/*.bak-p5
+xinggui-server/xinggui.exe*
+xinggui-server/xinggui-it.exe*xinggui-android/diag-*.ps1
+xinggui-android/*.ps1

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  播放队列单行。比 item_bottom_playlist 多一个「序号」和「时长」，
+  因为队列面板的核心用途是「看还有几首、还剩多久」，原布局没有这两个字段。
+  删除仍走按钮（长按/左滑由 ItemTouchHelper 提供，不依赖布局内控件）。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemQueueRoot"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="@color/surface"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="12dp">
+
+    <TextView
+        android:id="@+id/tvQueueIndex"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/ink_400"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/ivQueuePlaying"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_speaker_playing"
+        android:visibility="gone" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivQueueCover"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_album_default"
+        app:shapeAppearanceOverlay="@style/RoundedCornerImageView" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvQueueTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="歌曲名称"
+            android:textColor="@color/ink_900"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvQueueArtist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="歌手名称"
+            android:textColor="@color/ink_500"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvQueueDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:text="03:57"
+        android:textColor="@color/ink_400"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/btnQueueRemove"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:contentDescription="从队列移除"
+        android:padding="6dp"
+        android:src="@drawable/ic_remove_close" />
+</LinearLayout>

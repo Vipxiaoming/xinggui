@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- P2 只声明骨架真正会用到的权限。播放/下载/通知权限在对应模块接入时再加，
+         避免安装即索权（原版一次性申请了 MANAGE_EXTERNAL_STORAGE 等 10 项）。 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- P5 播放层。只加播放真正需要的四项；不申请 MANAGE_EXTERNAL_STORAGE。 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- P7 下载：只读「音频」一类，不申请 MANAGE_EXTERNAL_STORAGE / READ_MEDIA_VISUAL_USER_SELECTED。
+         maxSdkVersion=32 让 API 33+ 不再显示这条旧权限（否则系统设置里会出现两个存储开关）。 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <!--
+真机联调：用户可在 App 内自填服务端地址（可能是局域网 http），因此
+usesCleartextTraffic 置为 true。实际生效的仍是 networkSecurityConfig
+（Android 规则：config 优先于该属性），其中生产域名 music.wangxiaoming.vip
+被单独钉死 cleartextTrafficPermitted="false"，不会被降级成明文。
+--><application
+        android:name=".XingGuiApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="34">
+
+        <!--
+          P8：启动入口改为 AuthActivity（登录闸门）。
+          冷启动先做会话检查，未登录 / 待审核 / 被吊销都停在登录页，
+          结构上不可能绕过 —— 而不是靠每个功能页各自防守。
+        -->
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|locale"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.auth.RegisterActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|locale"
+            android:exported="false"
+            android:label="@string/register_title"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|locale"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--
+          MediaSessionService：Media3 自带 MediaStyle 通知与前台服务生命周期。
+          foregroundServiceType 必须声明 mediaPlayback，否则 Android 14 直接抛
+          MissingForegroundServiceTypeException。
+        -->
+        <service
+            android:name=".playback.PlaybackService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

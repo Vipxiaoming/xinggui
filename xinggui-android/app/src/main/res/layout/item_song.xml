@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/bg_item_song_ripple" android:layout_width="fill_parent" android:layout_height="68.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@+id/ivSelectCheck" android:visibility="gone" android:layout_width="22.0dip" android:layout_height="22.0dip" android:src="@drawable/ic_checkbox_unselected" android:layout_marginEnd="12.0dip" />
+    <TextView android:textSize="15.0sp" android:textColor="@color/ink_400" android:gravity="center" android:id="@+id/tvIndex" android:visibility="gone" android:layout_width="30.0dip" android:layout_height="wrap_content" android:text="1" android:fontFamily="sans-serif-medium" android:layout_marginEnd="4.0dip" />
+    <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivCover" android:layout_width="52.0dip" android:layout_height="52.0dip" android:src="@drawable/bg_album_default" android:scaleType="centerCrop" app:shapeAppearanceOverlay="@style/RoundedCornerImageView" />
+    <RelativeLayout android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:layout_marginStart="12.0dip" android:layout_marginEnd="10.0dip">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerVertical="true">
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="15.0sp" android:textColor="@color/ink_900" android:ellipsize="end" android:id="@+id/tvTitle" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="歌曲名称" android:singleLine="true" android:layout_weight="1.0" android:fontFamily="sans-serif-medium" />
+                <TextView android:textSize="10.0sp" android:textColor="@color/on_brand" android:id="@+id/tvSource" android:background="@drawable/bg_tag_source" android:paddingTop="2.0dip" android:paddingBottom="2.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="" android:paddingStart="6.0dip" android:paddingEnd="6.0dip" android:layout_marginStart="6.0dip" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip">
+                <TextView android:textSize="10.0sp" android:textColor="@color/brand" android:id="@+id/tvSongQualityTag" android:background="@drawable/bg_tag_quality" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SQ" android:layout_marginEnd="6.0dip" />
+                <TextView android:textSize="11.0sp" android:textColor="@color/ink_400" android:id="@+id/tvSongSize" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="32.5MB" android:layout_marginEnd="6.0dip" />
+                <TextView android:textSize="12.0sp" android:textColor="@color/ink_500" android:ellipsize="end" android:id="@+id/tvArtist" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="歌手名 · 专辑" android:singleLine="true" android:layout_weight="1.0" />
+            </LinearLayout>
+        </LinearLayout>
+        <View android:id="@+id/itemDivider" android:background="@color/line_soft" android:layout_width="fill_parent" android:layout_height="@dimen/stroke_hairline" android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+    <ImageView android:id="@+id/btnLike" android:background="?android:selectableItemBackgroundBorderless" android:layout_width="22.0dip" android:layout_height="22.0dip" android:src="@drawable/ic_heart_line" android:tint="@color/ink_400" />
+    <ImageView android:id="@+id/btnDownload" android:background="?android:selectableItemBackgroundBorderless" android:layout_width="22.0dip" android:layout_height="22.0dip" android:src="@drawable/ic_download_line" android:tint="@color/ink_400" android:layout_marginStart="18.0dip" />
+</LinearLayout>

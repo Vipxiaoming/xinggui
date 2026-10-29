@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 我的 Tab：复用原版 view_tab_mine_page（账号卡 + 收藏 + 深色 + 设置 + 清缓存 + 关于）。 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_sunken">
+
+    <include
+        android:id="@+id/mineTabContent"
+        layout="@layout/view_tab_mine_page" />
+</FrameLayout>

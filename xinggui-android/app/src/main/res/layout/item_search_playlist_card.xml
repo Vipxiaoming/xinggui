@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="110.0dip" android:layout_height="wrap_content" android:layout_marginEnd="12.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView android:layout_width="110.0dip" android:layout_height="110.0dip" app:cardCornerRadius="12.0dip" app:cardElevation="1.0dip">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <ImageView android:id="@+id/ivSearchPlaylistCover" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/bg_album_default" android:scaleType="centerCrop" />
+            <TextView android:textSize="10.0sp" android:textColor="@color/on_brand" android:id="@+id/tvSearchPlaylistCount" android:background="@drawable/bg_playcount_badge" android:paddingTop="2.0dip" android:paddingBottom="2.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="4.0dip" android:text="10万" android:layout_alignParentTop="true" android:paddingStart="6.0dip" android:paddingEnd="6.0dip" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <TextView android:textSize="12.0sp" android:textColor="@color/ink_900" android:ellipsize="end" android:id="@+id/tvSearchPlaylistTitle" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:text="歌单名称标题" android:maxLines="2" android:lineSpacingExtra="2.0dip" />
+</LinearLayout>

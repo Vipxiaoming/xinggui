@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 设置页：复用原版 view_settings_page；下载路径项在 P6 裁剪（MediaStore 方案不做自定义目录）。 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface">
+
+    <include
+        android:id="@+id/settingsPageContent"
+        layout="@layout/view_settings_page" />
+</FrameLayout>

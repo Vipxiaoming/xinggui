@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- P2 暗色覆盖：只改状态栏/导航栏图标明暗，其余全部继承 values/themes.xml。
+         日间 windowLightStatusBar=true（深色图标），暗色必须翻成 false（浅色图标），
+         否则会出现"深底 + 深图标"的低对比缺陷（P2 首次截图实测发现）。 -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand</item>
+        <item name="colorOnPrimary">@color/on_brand</item>
+        <item name="colorPrimaryContainer">@color/brand_soft</item>
+        <item name="colorOnPrimaryContainer">@color/brand_deep</item>
+        <item name="colorSecondary">@color/brand_light</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface_muted</item>
+        <item name="colorOnSurface">@color/ink_900</item>
+        <item name="colorOnSurfaceVariant">@color/ink_600</item>
+        <item name="colorOutline">@color/line</item>
+        <item name="colorError">@color/danger</item>
+
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <item name="android:alertDialogTheme">@style/AuroraDialogTheme</item>
+        <item name="alertDialogTheme">@style/AuroraDialogTheme</item>
+    </style>
+</resources>

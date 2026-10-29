@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head><meta charset="utf-8"><title>selftest</title>
+<link rel="stylesheet" href="assets/css/app.css">
+<style>#result{position:fixed;left:0;top:0;z-index:9999;background:#fff;font:12px/1.6 monospace;padding:8px;max-height:100vh;overflow:auto;width:100%}</style>
+</head>
+<body>
+
+<script src="assets/js/mock.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+<script src="assets/js/pages/users.js"></script>
+<script src="assets/js/pages/config.js"></script>
+<script src="assets/js/pages/version.js"></script>
+<script src="assets/js/pages/errors.js"></script>
+<script>
+const R = [];
+const RESULT_EL = document.createElement("pre");
+RESULT_EL.id = "result";
+RESULT_EL.textContent = "running…";
+document.documentElement.appendChild(RESULT_EL);
+function t(name, cond, extra) { R.push((cond ? "PASS " : "FAIL ") + name + (extra ? " :: " + extra : "")); }
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+async function run() {
+  await sleep(900);
+
+  /* 1. mock 数据层 */
+  try {
+    const ov = await API.overview();
+    t("mock overview.totalUsers>0", ov && ov.totalUsers > 0, "totalUsers=" + (ov && ov.totalUsers));
+    t("mock overview.trend 30 点", ov && ov.trend && ov.trend.length === 30, "len=" + (ov && ov.trend && ov.trend.length));
+  } catch (e) { t("mock overview", false, e.message); }
+
+  try {
+    const us = await API.users({ page: 1, pageSize: 5 });
+    t("mock users 分页", us && us.items && us.items.length === 5, "n=" + (us && us.items && us.items.length));
+    t("mock users total=32", us && us.total === 32, "total=" + (us && us.total));
+  } catch (e) { t("mock users", false, e.message); }
+
+  try {
+    const q = await API.users({ q: "夜航", page: 1, pageSize: 10 });
+    t("mock 搜索过滤", q && q.items && q.items.length === 1 && q.items[0].username === "夜航船", JSON.stringify(q && q.items && q.items.map(x=>x.username)));
+  } catch (e) { t("mock 搜索", false, e.message); }
+
+  try {
+    const p = await API.users({ status: "pending", page: 1, pageSize: 50 });
+    t("mock 状态筛选 pending", p && p.items && p.items.every(x => x.status === "pending"), "n=" + (p && p.items && p.items.length));
+  } catch (e) { t("mock 状态筛选", false, e.message); }
+
+  try {
+    const f = await API.favorites("林间小鹿");
+    t("mock favorites 非空", f && f.items && f.items.length > 0, "n=" + (f && f.items && f.items.length));
+    const pl = await API.playlists("林间小鹿");
+    t("mock playlists 含歌曲", pl && pl.items && pl.items[0].songs && pl.items[0].songs.length > 0, "n=" + (pl && pl.items && pl.items.length));
+    const h = await API.history("林间小鹿");
+    t("mock history 非空", h && h.items && h.items.length > 0);
+    const d = await API.downloads("林间小鹿");
+    t("mock downloads 非空", d && d.items && d.items.length > 0);
+    const s = await API.searches("林间小鹿");
+    t("mock searches 非空", s && s.items && s.items.length > 0);
+  } catch (e) { t("mock 用户数据", false, e.message); }
+
+  try {
+    const cfg = await API.config();
+    t("mock config.resolveOrder 4 家", cfg && cfg.resolveOrder && cfg.resolveOrder.length === 4, JSON.stringify(cfg && cfg.resolveOrder));
+    const v = await API.version();
+    t("mock version.latestVersion", v && v.latestVersion === "1.2.3", v && v.latestVersion);
+    const e2 = await API.statsErrors({ limit: 500 });
+    t("mock statsErrors 非空", e2 && e2.items && e2.items.length > 0);
+    const sc = await API.statsSearches();
+    t("mock statsSearches 非空", sc && sc.items && sc.items.length > 0);
+    const hl = await API.health();
+    t("mock health", hl && hl.uptime, hl && hl.uptime);
+  } catch (e) { t("mock 配置/监控", false, e.message); }
+
+  /* 2. 登录（mock 密码） */
+  try {
+    let failed = false;
+    try { await API.login("wrong", "123456"); } catch (e) { failed = (e.status === 401); }
+    t("mock 错误密码被拒", failed);
+    const ok = await API.login("admin12345", "123456");
+    t("mock 正确密码登录", ok && ok.token, ok && ok.token && ok.token.slice(0, 10));
+  } catch (e) { t("mock 登录", false, e.message); }
+
+  /* 3. 用户操作 */
+  try {
+    const r = await API.userAction("夜航船", "approve");
+    t("mock 通过审核", r && r.ok);
+    const u = await API.user("夜航船");
+    t("mock 状态已变为 active", u && u.status === "active", u && u.status);
+  } catch (e) { t("mock 审核", false, e.message); }
+
+  try {
+    const rp = await API.resetPassword("林间小鹿", {});
+    t("mock 重置密码返回临时口令", rp && rp.tempPassword, rp && rp.tempPassword);
+    const ex = await API.setExpire("林间小鹿", "2027-01-31");
+    t("mock 设置到期日", ex && ex.expireAt === "2027-01-31", ex && ex.expireAt);
+    const ub = await API.unbindDevice("林间小鹿", "dev_bc1039a4");
+    t("mock 解绑设备", ub && ub.ok);
+  } catch (e) { t("mock 用户操作", false, e.message); }
+
+  /* 4. UI 组件 */
+  try {
+    const b = UI.badge("active");
+    t("UI.badge 返回 HTML", /class="badge ok"/.test(b), b.slice(0, 40));
+    const el = UI.h("div", { class: "x", text: "hi" });
+    t("UI.h 构造元素", el.tagName === "DIV" && el.textContent === "hi" && el.className === "x");
+    t("UI.fmtNum 万", UI.fmtNum(18420) === "1.8 万", UI.fmtNum(18420));
+    t("UI.fmtBytes", UI.fmtBytes(4317292) === "4.1 MB", UI.fmtBytes(4317292));
+    t("UI.fmtDuration", UI.fmtDuration(257) === "4:17", UI.fmtDuration(257));
+    t("UI.esc 转义", UI.esc('<a href="x">') === "&lt;a href=&quot;x&quot;&gt;", UI.esc('<a href="x">'));
+  } catch (e) { t("UI 组件", false, e.message); }
+
+  /* 5. 表格 / 分页 */
+  try {
+    const tb = UI.table([{ label: "A", key: "a" }], [{ a: 1 }, { a: 2 }]);
+    t("UI.table 行数", tb.querySelectorAll("tbody tr").length === 2);
+    const empty = UI.table([{ label: "A", key: "a" }], []);
+    t("UI.table 空态", /暂无数据/.test(empty.textContent));
+    const pg = UI.pager({ total: 32, page: 1, pageSize: 10 }, () => {});
+    t("UI.pager 页数", pg.textContent.indexOf("4 页") > -1, pg.textContent.slice(0, 40));
+  } catch (e) { t("表格分页", false, e.message); }
+
+  /* 6. 路由 */
+  try {
+    t("默认 hash 路由", location.hash.indexOf("/dashboard") > -1, location.hash);
+    const view = document.getElementById("view");
+    t("外壳已挂载", !!view);
+    t("侧栏 6 个导航项", document.querySelectorAll(".nav a").length === 6, "n=" + document.querySelectorAll(".nav a").length);
+  } catch (e) { t("外壳", false, e.message); }
+
+  /* 7. 页面渲染：逐个切换 */
+  const pages = [["/dashboard", "监控面板"], ["/users", "用户管理"], ["/approvals", "待审核"], ["/config", "系统配置"], ["/version", "版本管理"], ["/errors", "错误日志"]];
+  for (const [path, title] of pages) {
+    try {
+      location.hash = "#" + path;
+      await sleep(700);
+      const v = document.getElementById("view");
+      const ok = v && v.textContent.indexOf(title) > -1;
+      t("页面渲染 " + path, ok, ok ? "" : (v ? v.textContent.slice(0, 60) : "no view"));
+    } catch (e) { t("页面 " + path, false, e.message); }
+  }
+
+  /* 8. 用户详情 + tab */
+  try {
+    location.hash = "#/users/" + encodeURIComponent("林间小鹿");
+    await sleep(900);
+    const v = document.getElementById("view");
+    t("详情页渲染", v && v.textContent.indexOf("林间小鹿") > -1);
+    t("详情页 5 个数据 tab", document.querySelectorAll(".tabs button").length === 5, "n=" + document.querySelectorAll(".tabs button").length);
+    const tabs = document.querySelectorAll(".tabs button");
+    let allOk = true;
+    for (let i = 0; i < tabs.length; i++) {
+      tabs[i].click();
+      await sleep(420);
+      const body = document.querySelector(".card-body.tight");
+      if (!body || body.textContent.trim().length < 10) allOk = false;
+    }
+    t("5 个 tab 均渲染内容", allOk);
+  } catch (e) { t("详情页", false, e.message); }
+
+  /* 9. 弹窗 */
+  try {
+    let closed = false;
+    const m = UI.modal({ title: "测试弹窗", content: UI.h("p", { text: "body" }), actions: [{ label: "关闭", onClick: c => { closed = true; c(); } }] });
+    await sleep(80);
+    t("modal 打开", !!document.querySelector(".overlay"));
+    var foot = document.querySelectorAll(".modal-foot .btn"); foot[foot.length-1].click();
+    await sleep(120);
+    t("modal 关闭", closed && !document.querySelector(".overlay"));
+  } catch (e) { t("modal", false, e.message); }
+
+  /* 10. 主题切换 */
+  try {
+    const before = document.documentElement.getAttribute("data-theme");
+    App.toggleTheme();
+    const after = document.documentElement.getAttribute("data-theme");
+    t("主题切换", before !== after, before + " -> " + after);
+    App.toggleTheme();
+    t("主题切回", document.documentElement.getAttribute("data-theme") === before);
+  } catch (e) { t("主题", false, e.message); }
+
+  /* 11. 无外部资源 */
+  try {
+    const links = Array.from(document.querySelectorAll('link[href],script[src]')).map(e => e.href || e.src);
+    const external = links.filter(u => !u.startsWith(location.origin) && !u.startsWith("data:"));
+    t("无外部 CDN 依赖", external.length === 0, external.join(","));
+  } catch (e) { t("外部依赖", false, e.message); }
+
+  const pass = R.filter(x => x.startsWith("PASS")).length;
+  const fail = R.filter(x => x.startsWith("FAIL")).length;
+  RESULT_EL.textContent = "== " + pass + " passed, " + fail + " failed ==\n" + R.join("\n");
+  document.title = "DONE " + pass + "/" + (pass + fail);
+}
+run();
+</script>
+</body>
+</html>

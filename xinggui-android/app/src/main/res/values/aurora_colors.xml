@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand">#ff2f6bff</color>
+    <color name="brand_deep">#ff1f51db</color>
+    <color name="brand_light">#ff7ba4ff</color>
+    <color name="brand_soft">#ffeef3ff</color>
+    <color name="brand_tint">#ffd6e2ff</color>
+    <color name="danger">#ffff4d4f</color>
+    <color name="dialog_edge">#0f000000</color>
+    <color name="dialog_shadow">#260f1626</color>
+    <color name="glass_stroke">#33ffffff</color>
+    <color name="info">#ff2f6bff</color>
+    <color name="ink_200">#ffe6e8ec</color>
+    <color name="ink_300">#ffc9cdd4</color>
+    <color name="ink_400">#ff7e828b</color>
+    <color name="ink_500">#ff5a5e66</color>
+    <color name="ink_600">#ff5a5e66</color>
+    <color name="ink_700">#ff35383e</color>
+    <color name="ink_900">#ff121316</color>
+    <color name="line">#ffeff0f3</color>
+    <color name="line_soft">#fff6f7f9</color>
+    <color name="on_brand">#ffffffff</color>
+    <color name="on_brand_muted">#ffc9d8ff</color>
+    <color name="rank_red">#ffff4d4f</color>
+    <color name="rank_red_deep">#ffe0343a</color>
+    <color name="success">#ff12b76a</color>
+    <color name="surface">#ffffffff</color>
+    <color name="surface_muted">#fff2f3f6</color>
+    <color name="surface_sunken">#fff7f8fa</color>
+    <color name="vinyl_base">#ff121316</color>
+    <color name="vinyl_groove">#ff1e2024</color>
+</resources>

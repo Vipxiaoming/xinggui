@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 下载历史/任务管理页：复用原版 view_download_history_page（4 个筛选 tab + 列表 + 空态）。 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface">
+
+    <include
+        android:id="@+id/downloadHistoryContent"
+        layout="@layout/view_download_history_page" />
+</FrameLayout>

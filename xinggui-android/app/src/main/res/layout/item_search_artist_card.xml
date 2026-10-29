@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="85.0dip" android:layout_height="wrap_content" android:layout_marginEnd="12.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivSearchArtistAvatar" android:background="@color/surface_muted" android:layout_width="65.0dip" android:layout_height="65.0dip" android:src="@drawable/bg_album_default" android:scaleType="centerCrop" app:shapeAppearanceOverlay="@style/CircleImageViewStyle" />
+    <TextView android:textSize="12.0sp" android:textColor="@color/ink_900" android:ellipsize="end" android:gravity="center" android:id="@+id/tvSearchArtistName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:text="歌手名称" android:maxLines="1" android:fontFamily="sans-serif-medium" />
+</LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- P2 占位文案。原版 strings.xml 14536 B 以框架/库字符串为主，应用文案多为硬编码中文，
+         这里先给骨架需要的少量文案，P6 拆分 Fragment 时按模块补齐到 strings-<feature>.xml。 -->
+    <string name="app_name">星轨音乐</string>
+    <string name="title_activity_main">星轨音乐</string>
+
+    <string name="nav_home">首页</string>
+    <string name="nav_playlist">歌单</string>
+    <string name="nav_library">下载</string>
+    <string name="nav_mine">我的</string>
+
+    <string name="mini_empty_notice">还没有正在播放的歌曲</string>
+    <string name="mini_play">播放</string>
+    <string name="mini_pause">暂停</string>
+    <string name="mini_playlist">播放列表</string>
+
+    <string name="playback_channel_name">播放控制</string>
+    <string name="play_mode_sequential">顺序播放</string>
+    <string name="play_mode_repeat_one">单曲循环</string>
+    <string name="play_mode_shuffle">随机播放</string>
+    <string name="now_playing_unknown">未知曲目</string>
+    <string name="now_playing_unknown_artist">未知歌手</string>
+
+    <string name="action_retry">重试</string>
+    <string name="action_back">返回</string>
+    <string name="action_refresh">刷新</string>
+
+    <string name="placeholder_module_pending">模块待接入（P3 起逐步实现）</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <!-- P8 认证 -->
+    <string name="auth_logo_desc">星轨音乐标志</string>
+    <string name="auth_subtitle">登录后同步歌单、收藏与播放记录</string>
+    <string name="auth_username_label">用户名</string>
+    <string name="auth_username_hint">3-32 位字母、数字、下划线或连字符</string>
+    <string name="auth_password_label">密码</string>
+    <string name="auth_password_hint">至少 8 位</string>
+    <string name="auth_login">登录</string>
+    <string name="auth_go_register">没有账号？注册新账号</string>
+    <string name="auth_device_limit_title">设备数已达上限</string>
+    <string name="auth_device_limit_desc">当前账号已在其它设备登录。解绑一台旧设备后即可在本机登录。</string>
+    <string name="auth_unbind_others">解绑其他设备</string>
+
+    <string name="register_title">注册星轨账号</string>
+    <string name="register_subtitle">注册后需要管理员审核，通过后即可登录</string>
+    <string name="register_confirm_label">确认密码</string>
+    <string name="register_confirm_hint">再次输入密码</string>
+    <string name="register_submit">提交注册申请</string>
+    <string name="register_go_login">已有账号？返回登录</string>
+    <string name="register_pending_title">注册成功，等待管理员审核</string>
+    <string name="register_pending_desc">审核通过后即可登录使用。无需重复提交，请耐心等待。</string>
+    <string name="register_back_to_login">返回登录页</string>
+    <string name="player_lyric">歌词</string>
+    <string name="player_queue">队列</string>
+</resources>

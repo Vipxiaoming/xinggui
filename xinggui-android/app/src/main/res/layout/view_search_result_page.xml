@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:id="@+id/searchResultContainer" android:background="@color/surface_sunken" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout android:id="@+id/searchAppBarLayout" android:background="@color/surface_sunken" android:layout_width="fill_parent" android:layout_height="wrap_content" app:elevation="0.0dip">
+        <com.google.android.material.appbar.CollapsingToolbarLayout android:id="@+id/searchCollapsingLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <LinearLayout android:orientation="vertical" android:id="@+id/layoutSearchHeaderSections" android:paddingTop="12.0dip" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+                <LinearLayout android:orientation="vertical" android:id="@+id/layoutSearchArtists" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="16.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" android:text="相关歌手" android:fontFamily="sans-serif-medium" />
+                    <androidx.recyclerview.widget.RecyclerView android:orientation="horizontal" android:id="@+id/rvSearchArtists" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:overScrollMode="never" android:nestedScrollingEnabled="false" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/layoutSearchPlaylists" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="14.0dip">
+                    <TextView android:textSize="16.0sp" android:textColor="@color/ink_900" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" android:text="精选歌单" android:fontFamily="sans-serif-medium" />
+                    <androidx.recyclerview.widget.RecyclerView android:orientation="horizontal" android:id="@+id/rvSearchPlaylists" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:overScrollMode="never" android:nestedScrollingEnabled="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <RelativeLayout android:id="@+id/layoutSearchSongsHeader" android:background="@color/surface_sunken" android:layout_width="fill_parent" android:layout_height="40.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="@color/ink_900" android:id="@+id/tvSearchSongsCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="单曲列表" android:layout_centerVertical="true" android:fontFamily="sans-serif-medium" />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvSearchSongs" android:paddingBottom="24.0dip" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never" app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
