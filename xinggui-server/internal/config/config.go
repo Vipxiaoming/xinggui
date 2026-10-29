@@ -21,6 +21,8 @@ type Config struct {
 	// 允许二者指向同一个合并 PEM 文件（证书链 + 私钥），Go 会分别解析。
 	TLSCert string
 	TLSKey  string
+	// AdminDir 为管理页静态文件根目录（含 index.html 与 assets/）。
+	AdminDir string
 }
 
 func getenv(key, def string) string {
@@ -44,6 +46,7 @@ func Load() (*Config, error) {
 	}
 	dbPath := getenv("XG_DB_PATH", filepath.Join(dataDir, "xinggui.db"))
 	baseURL := getenv("XG_BASE_URL", "https://music.wangxiaoming.vip:20001")
+	adminDir := getenv("XG_ADMIN_DIR", "./admin")
 
 	secret, err := loadSecret(dataDir)
 	if err != nil {
@@ -57,6 +60,7 @@ func Load() (*Config, error) {
 		DataDir:   dataDir,
 		TLSCert:   strings.TrimSpace(os.Getenv("XG_TLS_CERT")),
 		TLSKey:    strings.TrimSpace(os.Getenv("XG_TLS_KEY")),
+		AdminDir:  adminDir,
 	}, nil
 }
 

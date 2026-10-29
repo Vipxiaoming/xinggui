@@ -116,6 +116,14 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("GET /admin/api/stats/errors", s.adminAuth(s.handleAdminStatsErrors))
 	s.mux.HandleFunc("GET /admin/api/stats/searches", s.adminAuth(s.handleAdminStatsSearches))
 	s.mux.HandleFunc("GET /admin/api/health", s.adminAuth(s.handleAdminHealth))
+
+	// 管理页静态资源：/admin 精确匹配后 301 到 /admin/，/admin/ 前缀交给 FileServer。
+	// 方法限定 GET 保证 POST /admin/xxx 不会被静态服务吞掉；
+	// /admin/api/* 的模式更具体，按 ServeMux 优先级仍由上面的 API 路由处理。
+	s.mux.HandleFunc("GET /admin", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/admin/", http.StatusMovedPermanently)
+	})
+	s.mux.Handle("GET /admin/", http.StripPrefix("/admin/", http.FileServer(http.Dir(s.cfg.AdminDir))))
 }
 
 // ---------- 中间件与通用响应 ----------
@@ -151,7 +159,12 @@ func (s *Server) withCommon(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h := w.Header()
 		h.Set("X-Content-Type-Options", "nosniff")
-		h.Set("Cache-Control", "no-store")
+		// 管理页静态资源允许浏览器短时缓存；API 与其余接口一律 no-store。
+		if strings.HasPrefix(r.URL.Path, "/admin/") && !strings.HasPrefix(r.URL.Path, "/admin/api") {
+			h.Set("Cache-Control", "public, max-age=300")
+		} else {
+			h.Set("Cache-Control", "no-store")
+		}
 		// CORS：管理页与聚合层常不同端口，浏览器会先发预检。
 		// 只有 Origin 命中允许清单才回写 ACAO，并始终带 Vary: Origin。
 		if origin := strings.TrimSpace(r.Header.Get("Origin")); origin != "" {

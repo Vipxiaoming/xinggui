@@ -7,6 +7,8 @@ on:
     branches: [main]
     paths:
       - "xinggui-server/**"
+      - "xinggui-admin/**"
+      - ".dockerignore"
       - ".github/workflows/docker-publish.yml"
     tags:
       - "v*"
@@ -48,7 +50,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ./xinggui-server
+          context: .
           file: ./xinggui-server/Dockerfile
           platforms: linux/amd64
           push: true

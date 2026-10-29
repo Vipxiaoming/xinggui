@@ -1,0 +1,109 @@
+# ============================================================
+# Docker 构建上下文排除清单（仓库根 .dockerignore）
+# 构建上下文 = 仓库根，因此这里必须精确到子目录：
+# 只排除 xinggui-server/data*/ 之类的服务端数据目录，
+# 绝不使用 **/data/ 这种通配，否则会误伤
+# xinggui-android/app/src/main/java/.../data/ 这类正常源码包。
+# 目的：镜像里绝不出现用户数据、密钥、Windows 二进制、证书。
+# ============================================================
+
+# ---- 与服务端构建无关的子项目（大幅减小上下文体积）----
+xinggui-android/
+aurora-music-analysis/
+deploy/
+
+# ---- 服务端数据目录（含 SQLite 库 / jwt.secret / *.token-*）----
+xinggui-server/data/
+xinggui-server/data*/
+xinggui-server/certs/
+
+# ---- 密钥与令牌 ----
+**/jwt.secret
+*.token-*
+*.p9-admin-token
+.token-it
+.token-user-it
+
+# ---- 数据库文件 ----
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+**/*.db
+**/*.db-wal
+**/*.db-shm
+
+# ---- 证书与私钥 ----
+**/certs/
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.p7b
+*.pfx
+*.p12
+*.jks
+**/*.pem
+**/*.key
+**/*.crt
+
+# ---- Windows 二进制与备份 ----
+*.exe
+*.exe~
+*.exe.*
+*.bak
+*.bak-*
+*.dll
+*.so
+*.apk
+**/*.exe
+**/*.apk
+
+# ---- 管理端调试产物 / 内部凭据（不能进镜像）----
+xinggui-admin/_fix39/
+xinggui-admin/_shots/
+xinggui-admin/it-cred.json
+xinggui-admin/_it_live.html
+xinggui-admin/_selftest.html
+xinggui-admin/README.md
+xinggui-admin/server.js
+
+# ---- 根目录调试残留 ----
+p7-*.png
+p7-*.log
+build-p7.log
+ui*.xml
+u?.xml
+z?.xml
+*.log
+body-reg.json
+selftest-result.json
+shot.ps1
+it-*.ps1
+it-live-node.js
+.chrome-*/
+.p9/
+xinggui-acceptance.md
+
+# ---- 服务端本地脚本 / 抓包 / 调试残留 ----
+xinggui-server/chrome-p6/
+xinggui-server/chrome-*/
+xinggui-server/*.log
+xinggui-server/selftest-output.txt
+xinggui-server/p8-setup.json
+xinggui-server/*.ps1
+xinggui-server/*.bak
+xinggui-server/*.bat
+
+# ---- VCS / 编辑器 ----
+.git/
+.gitignore
+.dockerignore
+.idea/
+.vscode/
+*.iml
+
+# ---- 文档不参与构建 ----
+SELFTEST.md
